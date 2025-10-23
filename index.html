@@ -178,6 +178,7 @@
             animation: fadeIn 0.3s ease;
             padding: 20px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         @keyframes fadeIn {
@@ -195,6 +196,8 @@
             text-align: center;
             box-shadow: 0 20px 60px rgba(101, 67, 33, 0.25);
             animation: slideDown 0.3s ease;
+            position: relative;
+            z-index: 1001;
         }
 
         @keyframes slideDown {
@@ -275,11 +278,18 @@
             font-family: 'Cinzel', serif;
             text-transform: uppercase;
             font-size: 0.95rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
         }
 
         .view-photo-btn:hover {
             background-color: transparent;
             color: #a67c52;
+        }
+
+        .view-photo-btn:active {
+            transform: scale(0.98);
         }
 
         @media (max-width: 600px) {
