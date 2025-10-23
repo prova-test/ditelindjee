@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 19th Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #e8dcc8 0%, #f5f1e8 50%, #ebe5d9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(135deg, #f9f6f0 0%, #f3ede3 100%);
+            padding: 80px 60px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(101, 67, 33, 0.15);
+            position: relative;
+        }
+
+        .decorative-line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #a67c52, transparent);
+            margin: 0 auto 40px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: #5c4033;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        .age {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: #a67c52;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .name {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: #5c4033;
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            color: #6b5d52;
+            line-height: 2;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            font-style: italic;
+        }
+
+        .cta-button {
+            background-color: #a67c52;
+            color: #f9f6f0;
+            border: 2px solid #a67c52;
+            padding: 14px 45px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: #a67c52;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(166, 124, 82, 0.2);
+        }
+
+        .present-button {
+            background: linear-gradient(135deg, #a67c52 0%, #8b6839 100%);
+            color: #f9f6f0;
+            border: none;
+            padding: 18px 55px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(166, 124, 82, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .present-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .present-button:hover:before {
+            left: 100%;
+        }
+
+        .present-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(166, 124, 82, 0.35);
+        }
+
+        .decorative-bottom {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #a67c52, transparent);
+            margin: 50px auto 0;
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: sparkle-fade 2s ease-out forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty));
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #f9f6f0 0%, #f3ede3 100%);
+            margin: 5% auto;
+            padding: 50px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(101, 67, 33, 0.25);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            color: #a67c52;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #5c4033;
+        }
+
+        .star-box {
+            background: linear-gradient(135deg, #3d2817 0%, #5c4033 100%);
+            padding: 35px;
+            border-radius: 8px;
+            color: #e8d7c3;
+            margin-bottom: 30px;
+        }
+
+        .star-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #d4a574;
+            letter-spacing: 2px;
+        }
+
+        .star-info {
+            font-size: 1rem;
+            line-height: 1.8;
+            text-align: left;
+            color: #c9b5a0;
+        }
+
+        .dedication-box {
+            background: linear-gradient(135deg, #f5ede3 0%, #ebe5d9 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #a67c52;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .dedication-box p {
+            color: #5c4033;
+            line-height: 1.9;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        .view-photo-btn {
+            display: inline-block;
+            background-color: #a67c52;
+            color: #f9f6f0;
+            padding: 12px 35px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
+            border: 2px solid #a67c52;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .view-photo-btn:hover {
+            background-color: transparent;
+            color: #a67c52;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .age {
+                font-size: 2rem;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 50px 30px;
+            }
+            .modal-content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorative-line"></div>
+        <h1>Gezuar Ditelindjen</h1>
+        <div class="age">19</div>
+        <div class="name">Daela</div>
+        <p class="message">
+            Te uroj nje jete te mbushur plote me surpriza , lumturi elegance dhe qe cdo dite te afroj me shume me plotesimin e enderrave te tua .
+            
+        </p>
+        <button class="cta-button" onclick="celebrate()">🥳Festo🥳</button>
+        <button class="present-button" onclick="openPresent()">✨ Zbulo Surprizen tende ✨</button>
+        <div class="decorative-bottom"></div>
+    </div>
+
+    <div id="presentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePresent()">&times;</span>
+            <h2 style="font-family: 'Cinzel', serif; color: #5c4033; margin-bottom: 30px; font-size: 2.2rem; letter-spacing: 2px;">Your Star ⭐</h2>
+            
+            <div class="star-box">
+                <div class="star-name">Ylli i Daeles</div>
+                <div class="star-info">
+                    <p><strong>Location:</strong> Constellation of Lizard (Lacerta)</p>
+                    <p style="margin-top: 10px;"><strong>Coordinates:</strong> RA 22° 24′ 49.44″, Dec 41.5017°</p>
+                    <p style="margin-top: 10px;"><strong>Magnitude:</strong> 16.95 mag</p>
+                    <p style="margin-top: 10px;"><strong>Best Viewing:</strong> October evenings from Tiranë, Albania</p>
+                </div>
+            </div>
+
+            <div class="dedication-box">
+                <p>
+                    "Gezuar ditelindjen Bija e babit. Shpresoj qe kjo te jete nje dhurata qe do te pelqej. Te uroj gjithe te mirat e kesaj bote te jesh e lumtur dhe e gezuar gjate gjithe jetes tende. Me dashuri Babi"
+                </p>
+            </div>
+
+            <p style="color: #a67c52; margin-bottom: 25px; font-size: 1rem; letter-spacing: 1px;">Named on October 24, 2025</p>
+            
+            <a href="https://drive.google.com/file/d/11nhxrtASvfw5gnDP-xEJdpHIYi4nwCdO/view?usp=sharing" target="_blank" class="view-photo-btn">
+                Shiko Dokumentat
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function celebrate() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.textContent = '✨';
+                    sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                    sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                    
+                    const angle = (Math.PI * 2 * i) / 12;
+                    const distance = 100;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    sparkle.style.setProperty('--tx', tx + 'px');
+                    sparkle.style.setProperty('--ty', ty + 'px');
+                    
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, i * 50);
+            }
+        }
+
+        function openPresent() {
+            document.getElementById('presentModal').style.display = 'block';
+        }
+
+        function closePresent() {
+            document.getElementById('presentModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('presentModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
